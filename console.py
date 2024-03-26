@@ -165,16 +165,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        new_instance = HBNBCommand.classes[classname]()
-        storage.save()
-        print(new_instance.id)
-
         for k, v in kwargs.items():
             if k in HBNBCommand.types:
-                setattr(new_instance, k, HBNBCommand.types[k](v))
+                kwargs[k] = HBNBCommand.types[k](v)
             else:
-                setattr(new_instance, k, v.strip('"'))
-        storage.save()
+                kwargs[k] = v.strip('"')
+        new_instance = HBNBCommand.classes[classname](**kwargs)
+        print(new_instance.id)
+        # storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
