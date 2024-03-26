@@ -2,7 +2,7 @@ from os import environ
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
-from base_model import Base
+from ..base_model import Base
 
 
 class DBStorage:
@@ -16,10 +16,10 @@ class DBStorage:
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}/{}'
             .format(
-                environ("HBNB_MYSQL_USER"),
-                environ("HBNB_MYSQL_PWD"),
-                environ("HBNB_MYSQL_HOST"),
-                environ("HBNB_MYSQL_DB")
+                environ["HBNB_MYSQL_USER"],
+                environ["HBNB_MYSQL_PWD"],
+                environ["HBNB_MYSQL_HOST"],
+                environ["HBNB_MYSQL_DB"]
             ), pool_pre_ping=True
         )
         self.__session = sessionmaker(bind=self.__engine)
