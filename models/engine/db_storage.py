@@ -2,9 +2,7 @@ from os import environ
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from base_model import Base
 
 
 class DBStorage:
