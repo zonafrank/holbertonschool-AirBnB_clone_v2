@@ -56,8 +56,8 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        from models.base_model import BaseModel
         """delete obj from __objects if it is inside"""
+        from models.base_model import BaseModel
         if not obj:
             return
 
