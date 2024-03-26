@@ -4,13 +4,12 @@ to instantiates an object of class FileStorage or DBStorage"""
 from os import environ
 
 
-storage_type = environ['HBNB_TYPE_STORAGE', '']
-
+storage_type = environ.get('HBNB_TYPE_STORAGE', 'file')
 if storage_type == "db":
     from models.engine.db_storage import DBStorage
     storage = DBStorage()
-    storage.reload()
 else:
     from models.engine.file_storage import FileStorage
     storage = FileStorage()
-    storage.reload()
+
+storage.reload()

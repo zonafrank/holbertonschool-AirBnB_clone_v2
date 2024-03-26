@@ -2,7 +2,7 @@ from os import environ
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
-from ..base_model import Base
+from models.base_model import Base
 
 
 class DBStorage:
@@ -12,7 +12,6 @@ class DBStorage:
     def __init__(self):
         if environ.get("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}/{}'
             .format(
@@ -49,6 +48,10 @@ class DBStorage:
             self.session.query(obj).delete()
 
     def reload(self):
+        from models.city import City
+        from models.state import State
+        from models.user import User
+
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False)
