@@ -27,7 +27,7 @@ class DBStorage:
 
     def all(self, cls=None) -> dict:
         temp = {}
-        if cls == None:
+        if cls is None:
             classes = [City, State]
             for _cls in classes:
                 rows = self.session.query(_cls).all()
