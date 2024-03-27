@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ City Module for HBNB project """
+
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
