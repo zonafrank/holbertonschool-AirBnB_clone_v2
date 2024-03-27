@@ -3,6 +3,8 @@ from os import environ
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 from models.base_model import Base
+from models.city import City
+from models.state import State
 
 
 class DBStorage:
@@ -24,17 +26,19 @@ class DBStorage:
         self.__session = sessionmaker(bind=self.__engine)
 
     def all(self, cls=None) -> dict:
-        from models.base_model import BaseModel
         temp = {}
         if cls == None:
-            classes = [v.__name__ for v in BaseModel.__subclasses__()]
-            queries = self.session.query(*classes)
+            classes = [City, State]
+            for _cls in classes:
+                rows = self.session.query(_cls).all()
+                for row in rows:
+                    key = f"{type(_cls).__name__}.{row.id}"
+                    temp[key] = row
         else:
-            queries = self.session.query(*cls)
-
-        for obj in queries:
-            key = f"{obj.__class__}.{obj.id}"
-            temp[key] = obj
+            queries = self.session.query(cls).all()
+            for obj in queries:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                temp[key] = obj
         return temp
 
     def new(self, obj):
