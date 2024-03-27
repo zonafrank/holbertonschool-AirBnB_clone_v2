@@ -3,7 +3,7 @@
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import create_engine, Column, DateTime, String
+from sqlalchemy import Column, DateTime, String
 from os import getenv
 
 Base = object
