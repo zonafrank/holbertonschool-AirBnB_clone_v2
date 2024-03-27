@@ -7,13 +7,14 @@ from os import getenv
 
 from models.amenity import Amenity
 
+if getenv("HBNB_TYPE_STORAGE") == "db":
+    place_amenity = Table(
+        'place_amenity',
+        Base.metadata,
+        Column('place_id', String(60), ForeignKey('places.id')),
+        Column('amenity_id', String(60), ForeignKey('amenities.id'))
+    )
 
-place_amenity = Table(
-    'place_amenity',
-    Base.metadata,
-    Column('place_id', String(60), ForeignKey('places.id')),
-    Column('amenity_id', String(60), ForeignKey('amenities.id'))
-)
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -33,7 +34,8 @@ class Place(BaseModel, Base):
         cities = relationship("City", back_populates="places")
         reviews = relationship(
             "Review", back_populates="place", cascade="delete, delete-orphan")
-        amenities = relationship("Amenity", secondary='place_amenity', viewonly=False)
+        amenities = relationship(
+            "Amenity", secondary='place_amenity', viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -63,4 +65,3 @@ class Place(BaseModel, Base):
         def amenities(self, amenity):
             if isinstance(amenity, Amenity):
                 self.amenity_ids.append(amenity.id)
-
