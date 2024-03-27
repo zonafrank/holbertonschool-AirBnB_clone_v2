@@ -4,8 +4,12 @@ import uuid
 from datetime import datetime, timezone
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import create_engine, Column, DateTime, String
+from os import getenv
 
-Base = declarative_base()
+Base = object
+
+if getenv("HBNB_TYPE_STORAGE") == "db":
+    Base = declarative_base()
 
 
 class BaseModel:
