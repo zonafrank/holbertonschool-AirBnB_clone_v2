@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from os import environ
 
 from sqlalchemy.orm import sessionmaker, scoped_session
