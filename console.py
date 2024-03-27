@@ -33,7 +33,11 @@ def is_val_float(val):
 
 
 def is_val_type_valid(val):
-    return any([func(val) for func in [is_val_string, is_val_int, is_val_float]])
+    return any(
+        [func(val)
+         for func
+         in [is_val_string, is_val_int, is_val_float]]
+    )
 
 
 def parse_args_for_create(params_list):

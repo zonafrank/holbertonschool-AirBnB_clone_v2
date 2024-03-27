@@ -19,29 +19,34 @@ class BaseModel:
     updated_at = None
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        id = Column(String(60), primary_key=True, unique=True, nullable=False)
+        id = Column(String(60),
+                    primary_key=True,
+                    unique=True,
+                    nullable=False)
         created_at = Column(DateTime, nullable=False,
                             default=lambda: datetime.now(timezone.utc))
-        updated_at = Column(DateTime, nullable=False, default=lambda: datetime.now(
-            timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+        updated_at = Column(DateTime,
+                            nullable=False,
+                            default=lambda: datetime.now(timezone.utc),
+                            onupdate=lambda: datetime.now(timezone.utc))
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
-        if kwargs and type(kwargs) == dict:
+        if kwargs and isinstance(kwargs, dict):
             if 'id' not in kwargs:
                 kwargs['id'] = str(uuid.uuid4())
 
             if 'created_at' not in kwargs:
                 kwargs['created_at'] = datetime.now()
             else:
-                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['created_at'] = datetime.strptime(
+                    kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
 
             if 'updated_at' not in kwargs:
                 kwargs['updated_at'] = datetime.now()
             else:
-                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['updated_at'] = datetime.strptime(
+                    kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
 
             if '__class__' in kwargs:
                 del kwargs['__class__']
