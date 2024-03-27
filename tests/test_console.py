@@ -6,6 +6,7 @@ from io import StringIO
 from tests.test_models.test_base_model import test_basemodel
 from console import HBNBCommand
 
+
 class test_console(test_basemodel):
     """ """
 
@@ -31,10 +32,9 @@ class test_console(test_basemodel):
         command = 'City'
         HBNBCommand().do_show(command)
         self.assertEqual(mock_stdout.getvalue(), "** instance id missing **\n")
-    
+
     @patch('sys.stdout', new_callable=StringIO)
     def test_show_wrong_id(self, mock_stdout):
         command = 'City 123123'
         HBNBCommand().do_show(command)
         self.assertEqual(mock_stdout.getvalue(), "** no instance found **\n")
-    
