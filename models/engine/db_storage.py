@@ -33,7 +33,7 @@ class DBStorage:
             for _cls in classes:
                 rows = self.session.query(_cls).all()
                 for row in rows:
-                    key = f"{type(_cls).__name__}.{row.id}"
+                    key = f"{type(row).__name__}.{row.id}"
                     temp[key] = row
         else:
             queries = self.session.query(cls).all()
@@ -50,7 +50,7 @@ class DBStorage:
 
     def delete(self, obj=None):
         if obj:
-            self.session.query(obj).delete()
+            self.session.delete(obj)
 
     def reload(self):
         from models.city import City
