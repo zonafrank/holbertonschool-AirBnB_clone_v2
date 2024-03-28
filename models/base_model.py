@@ -20,9 +20,7 @@ class BaseModel:
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
         id = Column(String(60),
-                    primary_key=True,
-                    unique=True,
-                    nullable=False)
+                    primary_key=True)
         created_at = Column(DateTime, nullable=False,
                             default=lambda: datetime.now(timezone.utc))
         updated_at = Column(DateTime,
