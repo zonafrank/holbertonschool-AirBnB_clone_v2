@@ -13,7 +13,8 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        if environ.get("HBNB_ENV") == "test":
+        if (environ.get("HBNB_ENV") == "test"
+                and self.__engine is not None):
             Base.metadata.drop_all(self.__engine)
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}/{}'
