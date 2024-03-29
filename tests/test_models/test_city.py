@@ -12,13 +12,17 @@ class test_City(test_basemodel):
         super().__init__(*args, **kwargs)
         self.name = "City"
         self.value = City
+        self.args = {
+            "name": '',
+            "state_id": ''
+        }
 
     def test_state_id(self):
         """ """
-        new = self.value()
+        new = self.value(**self.args)
         self.assertEqual(type(new.state_id), str)
 
     def test_name(self):
         """ """
-        new = self.value()
+        new = self.value(**self.args)
         self.assertEqual(type(new.name), str)
