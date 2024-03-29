@@ -5,17 +5,20 @@ from models.base_model import BaseModel
 from models import storage
 import os
 
+storage_engine = os.getenv("HBNB_TYPE_STORAGE")
 
+
+@unittest.skipIf(storage_engine == "db", "db storage is not being used")
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
     def setUp(self):
         """ Set up test environment """
         del_list = []
-        for key in storage._FileStorage__objects.keys():
+        for key in storage.all().keys():
             del_list.append(key)
         for key in del_list:
-            del storage._FileStorage__objects[key]
+            del storage.all()[key]
 
     def tearDown(self):
         """ Remove storage file at end of tests """
