@@ -11,6 +11,7 @@ from console import HBNBCommand
 
 storage_type = os.getenv("HBNB_TYPE_STORAGE")
 
+
 class test_console(test_basemodel):
     """ """
 
@@ -39,7 +40,7 @@ class test_console(test_basemodel):
         command = 'City'
         HBNBCommand().do_show(command)
         self.assertEqual(mock_stdout.getvalue(), "** instance id missing **\n")
-    
+
     @unittest.skipIf(storage_type == "db", "db storage in used")
     @patch('sys.stdout', new_callable=StringIO)
     def test_show_wrong_id(self, mock_stdout):
