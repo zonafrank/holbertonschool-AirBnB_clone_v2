@@ -76,6 +76,7 @@ class test_fileStorage(unittest.TestCase):
         storage.save()
         self.assertTrue(os.path.exists('file.json'))
 
+    @unittest.skipIf(storage_type == "db", "db storage in used")
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
