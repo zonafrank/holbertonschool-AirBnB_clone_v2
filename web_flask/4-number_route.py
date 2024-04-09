@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort
 import string
 
 app = Flask(__name__)
@@ -39,6 +39,7 @@ def python_route(text="is cool"):
 def number_route(n):
     if (n and n.isdigit()):
         return f"{n} is a number"
+    abort(404)
 
 
 if __name__ == "__main__":
