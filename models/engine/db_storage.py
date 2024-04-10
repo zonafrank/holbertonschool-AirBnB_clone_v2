@@ -6,6 +6,10 @@ from sqlalchemy import create_engine
 from models.base_model import Base
 from models.city import City
 from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.user import User
 
 
 class DBStorage:
@@ -30,7 +34,7 @@ class DBStorage:
     def all(self, cls=None) -> dict:
         temp = {}
         if cls is None:
-            classes = [City, State]
+            classes = [City, State, Amenity, Place, Review, User]
             for _cls in classes:
                 rows = self.session.query(_cls).all()
                 for row in rows:
@@ -65,6 +69,9 @@ class DBStorage:
             bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        self.session.close()
 
     @property
     def session(self):
