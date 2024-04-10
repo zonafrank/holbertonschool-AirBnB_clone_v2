@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>HBNB</title>
+</head>
+
+<body>
+  <H1>States</H1>
+  <ul>
+    {% for item in data %}
+    <li>{{item.state.id}}: <b>{{item.state.name}}</b>
+      <ul>
+        {% for city in item.cities %}
+        <li>{{city.id}}: <b>{{city.name}}</b></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
