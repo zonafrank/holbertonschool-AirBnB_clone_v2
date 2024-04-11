@@ -25,7 +25,9 @@ def states_list():
         item["cities"] = sorted(state.cities, key=lambda city: city.name)
         states_data.append(item)
 
-    return render_template("10-hbnb_filters.html", data={"states": states_data, "amenities": amenity_names})
+    return render_template(
+        "10-hbnb_filters.html",
+        data={"states": states_data, "amenities": amenity_names})
 
 
 @app.teardown_appcontext

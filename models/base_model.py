@@ -58,19 +58,19 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        self_dict = self.__dict__
-        if getenv("HBNB_TYPE_STORAGE") == "db":
-            if "_sa_instance_state" in self_dict:
-                del self_dict["_sa_instance_state"]
+        self_dict = {}
+        for key, val in self.__dict__.items():
+            if key != "_sa_instance_state":
+                self_dict[key] = val
         return '[{}] ({}) {}'.format(cls, self.id, self_dict)
 
     def __repr__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        self_dict = self.__dict__
-        if getenv("HBNB_TYPE_STORAGE") == "db":
-            if "_sa_instance_state" in self_dict:
-                del self_dict["_sa_instance_state"]
+        self_dict = {}
+        for key, val in self.__dict__.items():
+            if key != "_sa_instance_state":
+                self_dict[key] = val
         return '[{}] ({}) {}'.format(cls, self.id, self_dict)
 
     def save(self):

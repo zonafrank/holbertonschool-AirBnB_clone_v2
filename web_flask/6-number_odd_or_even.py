@@ -6,14 +6,6 @@ import string
 app = Flask(__name__)
 
 
-def is_number(val):
-    try:
-        float(val)
-        return True
-    except:
-        return False
-
-
 @app.route("/", strict_slashes=False)
 def hello_route():
     return "Hello HBNB!"
@@ -64,9 +56,13 @@ def number_template(n):
 def number_odd_or_even(n):
     if isinstance(n, int):
         if n % 2 == 0:
-            return render_template("6-number_odd_or_even.html", val=n, even_odd="even")
+            return render_template(
+                "6-number_odd_or_even.html",
+                val=n, even_odd="even")
         else:
-            return render_template("6-number_odd_or_even.html", val=n, even_odd="odd")
+            return render_template(
+                "6-number_odd_or_even.html",
+                val=n, even_odd="odd")
 
 
 if __name__ == "__main__":

@@ -6,14 +6,6 @@ import string
 app = Flask(__name__)
 
 
-def is_number(val):
-    try:
-        float(val)
-        return True
-    except:
-        return False
-
-
 @app.route("/", strict_slashes=False)
 def hello_route():
     return "Hello HBNB!"

@@ -33,19 +33,19 @@ class DBStorage:
 
     def all(self, cls=None) -> dict:
         temp = {}
-        if self.__session:
-            if cls is None:
-                classes = [City, State, Amenity, Place, Review, User]
-                for _cls in classes:
-                    rows = self.session.query(_cls).all()
-                    for row in rows:
-                        key = f"{type(row).__name__}.{row.id}"
-                        temp[key] = row
-            else:
-                queries = self.session.query(cls).all()
-                for obj in queries:
-                    key = f"{obj.__class__.__name__}.{obj.id}"
-                    temp[key] = obj
+        # if self.__session:
+        if cls is None:
+            classes = [City, State, Amenity, Place, Review, User]
+            for _cls in classes:
+                rows = self.session.query(_cls).all()
+                for row in rows:
+                    key = f"{type(row).__name__}.{row.id}"
+                    temp[key] = row
+        else:
+            queries = self.session.query(cls).all()
+            for obj in queries:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                temp[key] = obj
         return temp
 
     def new(self, obj):
