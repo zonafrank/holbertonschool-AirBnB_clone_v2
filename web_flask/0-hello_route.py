@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module for task 0"""
 
 from flask import Flask
 """Module for task 0: creates a basic flask app"""
