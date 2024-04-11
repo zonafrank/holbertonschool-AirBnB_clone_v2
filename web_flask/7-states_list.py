@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module for task 8"""
 
 from models.state import State
 from models import storage
@@ -10,6 +11,7 @@ app = Flask(__name__)
 
 @app.route("/states_list", strict_slashes=False)
 def states_list():
+    """ Returns HTML lisitng out all States """
     states = storage.all(State)
     sorted_states = sorted(states.values(), key=lambda s: s.name)
 
@@ -18,6 +20,7 @@ def states_list():
 
 @app.teardown_appcontext
 def close_db(error):
+    """ Remove the current SQLAlchemy Session """
     storage.close()
 
 

@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 
 from flask import Flask
+"""Module for task 0: creates a basic flask app"""
 
 app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
 def hello():
+    """returns a string literal response"""
     return "Hello HBNB!"
 
 
